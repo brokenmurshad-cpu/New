@@ -1,0 +1,334 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0b0614;
+  --color-foreground: #ffffff;
+
+  --color-card: #120a1f;
+  --color-card-foreground: #ffffff;
+
+  --color-accent: #a855f7;
+  --color-accent-foreground: #ffffff;
+
+  --color-secondary: #1a0f2e;
+  --color-secondary-foreground: #ffffff;
+
+  --color-muted: #1a0f2e;
+  --color-muted-foreground: rgba(255, 255, 255, 0.6);
+
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-input: rgba(255, 255, 255, 0.08);
+  --color-ring: #a855f7;
+
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+
+  --font-sans: var(--font-manrope), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-syne), system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  cursor: none;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Layout helpers used across sections ===== */
+
+.container-px {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90rem;
+}
+
+@media (min-width: 768px) {
+  .container-px {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-px {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+}
+
+.section-pad {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+@media (min-width: 768px) {
+  .section-pad {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+.sticky-section {
+  isolation: isolate;
+}
+
+/* ===== Glassmorphism card ===== */
+
+.glass {
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* ===== Gradient accent text ===== */
+
+.text-gradient-accent {
+  background: linear-gradient(135deg, #a855f7, #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ===== Click ripple effect ===== */
+
+.click-ripple {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  margin-top: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.55), transparent 70%);
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* ===== Custom Cursor ===== */
+
+.cursor-dot,
+.cursor-outline {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  mix-blend-mode: difference;
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-outline {
+  width: 40px;
+  height: 40px;
+  border: 2px solid white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+}
+
+.cursor-outline.cursor-hover {
+  width: 70px;
+  height: 70px;
+  opacity: 0.6;
+}
+
+/* ===== Scrollbar ===== */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #120a1f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a855f7;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9333ea;
+}
+
+/* ===== Selection ===== */
+
+::selection {
+  background: rgba(168, 85, 247, 0.3);
+  color: #ffffff;
+}
+
+/* ===== Fullscreen menu curved reveal ===== */
+
+.rounded__div__up {
+  position: relative;
+  height: clamp(2.5rem, 6vw, 5rem);
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.round__bg__up {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0 0 51% 51% / 0 0 100% 100%;
+  box-shadow: 0 -40px 80px rgba(168, 85, 247, 0.18);
+}
+
+/* ===== Preloader / scribble transition ===== */
+
+.preloader-root {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--color-background);
+  pointer-events: none;
+}
+
+.transition-scribble {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  color: var(--color-accent);
+}
+
+.transition-logo h2 {
+  letter-spacing: -0.02em;
+}
+
+/* ===== Animated profession marquee text ===== */
+
+.marquee-gradient-text {
+  background: linear-gradient(100deg, #9d4edd, #ffffff 50%, #a855f7);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.35));
+}
+
+/* ===== Floating WhatsApp button motion ===== */
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+.whatsapp-float {
+  animation: float-y 3s ease-in-out infinite;
+}
+
+.whatsapp-pulse {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ===== Hero background slow zoom ===== */
+
+.hero-bg-zoom {
+  transform: scale(1.08);
+  will-change: transform;
+}
+
+/* ===== Custom hero title font (Priestacy) ===== */
+/* font-display: block ensures no fallback font is ever painted for the
+   title — text stays invisible for a brief moment rather than flashing
+   a system font, per the "no fallback unless load fails" requirement. */
+
+@font-face {
+  font-family: "Priestacy";
+  src: url("/fonts/Priestacy.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+.hero-title-custom {
+  font-family: "Priestacy", cursive;
+  font-size: clamp(3.2rem, 12vw, 8.5rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  filter: drop-shadow(0 0 40px rgba(168, 85, 247, 0.35));
+}
+
+/* ===== Hero video showcase card glow ===== */
+
+@keyframes hero-video-glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 40px rgba(168, 85, 247, 0.25), 0 30px 90px rgba(0, 0, 0, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 70px rgba(168, 85, 247, 0.45), 0 30px 90px rgba(0, 0, 0, 0.45);
+  }
+}
+
+.hero-video-glow {
+  animation: hero-video-glow-pulse 4s ease-in-out infinite;
+}
