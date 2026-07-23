@@ -52,34 +52,34 @@ export default function Hero() {
           0.25,
         )
         .fromTo(
+          ".hero-video-card",
+          { opacity: 0, y: 40, scale: 0.94 },
+          { opacity: 1, y: 0, scale: 1, duration: 1, ease: "power3.out" },
+          0.55,
+        )
+        .fromTo(
           ".hero-social-icon",
           { opacity: 0, y: 16 },
           { opacity: 1, y: 0, duration: 0.6, stagger: 0.12 },
-          0.7,
+          0.85,
         )
         .fromTo(
           ".hero-subtitle-line",
           { opacity: 0, y: 24, filter: "blur(6px)" },
           { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, stagger: 0.1 },
-          0.95,
+          1.05,
         )
         .fromTo(
           ".hero-description",
           { opacity: 0, y: 20, filter: "blur(4px)" },
           { opacity: 1, y: 0, filter: "blur(0px)", duration: 1 },
-          1.2,
+          1.3,
         )
         .fromTo(
           ".hero-cta",
           { opacity: 0, y: 24 },
           { opacity: 1, y: 0, duration: 0.8, stagger: 0.12 },
-          1.35,
-        )
-        .fromTo(
-          ".hero-video-card",
-          { opacity: 0, y: 40, scale: 0.94 },
-          { opacity: 1, y: 0, scale: 1, duration: 1, ease: "power3.out" },
-          1.5,
+          1.45,
         )
         .fromTo(
           ".hero-scroll-indicator",
@@ -175,64 +175,74 @@ export default function Hero() {
         {/* 1. Name — custom font, single instance */}
         <h1 className="hero-title-custom hero-parallax-text leading-none text-white">{personal.fullName}</h1>
 
-        {/* 2. Social icons — centered, floating, magnetic, parallax */}
-        <div className="hero-parallax-text mt-8 flex items-center gap-4 md:mt-10">
-          {socialItems.map((item, i) => (
-            <motion.div
-              key={item.label}
-              className="hero-social-icon"
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 2.6 + i * 0.25, repeat: Infinity, ease: "easeInOut", delay: i * 0.2 }}
-            >
-              <Magnetic strength={30}>
-                <a
-                  href={item.href}
-                  target={item.href.startsWith("http") ? "_blank" : undefined}
-                  rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  aria-label={item.label}
-                  data-cursor="hover"
-                  className="glass group flex h-12 w-12 items-center justify-center rounded-full text-white/80 transition-all duration-300 hover:-translate-y-1 hover:rotate-[8deg] hover:text-accent hover:shadow-[0_0_30px_rgba(168,85,247,0.5)] md:h-[52px] md:w-[52px]"
+        {/* Two-column row beneath the title: text stack (left, shifted under
+            "Muhammad") and the glass video showcase (right, shifted under
+            "Husnain"). Stacks vertically on mobile — video first, then text. */}
+        <div className="mt-6 flex w-full flex-col items-center gap-10 md:mt-10 md:flex-row md:items-center md:justify-center md:gap-8 lg:gap-12">
+          {/* Left column — icons, subtitle, description, CTAs */}
+          <div className="order-2 flex w-full flex-col items-center text-center md:order-1 md:w-1/2 md:items-center md:-translate-x-3 lg:-translate-x-8">
+            {/* 2. Social icons — centered, floating, magnetic, parallax */}
+            <div className="hero-parallax-text flex items-center gap-4">
+              {socialItems.map((item, i) => (
+                <motion.div
+                  key={item.label}
+                  className="hero-social-icon"
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ duration: 2.6 + i * 0.25, repeat: Infinity, ease: "easeInOut", delay: i * 0.2 }}
                 >
-                  <item.icon className="h-[19px] w-[19px] transition-transform duration-300 group-hover:scale-110 md:h-[22px] md:w-[22px]" />
-                </a>
-              </Magnetic>
-            </motion.div>
-          ))}
-        </div>
+                  <Magnetic strength={30}>
+                    <a
+                      href={item.href}
+                      target={item.href.startsWith("http") ? "_blank" : undefined}
+                      rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      aria-label={item.label}
+                      data-cursor="hover"
+                      className="glass group flex h-12 w-12 items-center justify-center rounded-full text-white/80 transition-all duration-300 hover:-translate-y-1 hover:rotate-[8deg] hover:text-accent hover:shadow-[0_0_30px_rgba(168,85,247,0.5)] md:h-[52px] md:w-[52px]"
+                    >
+                      <item.icon className="h-[19px] w-[19px] transition-transform duration-300 group-hover:scale-110 md:h-[22px] md:w-[22px]" />
+                    </a>
+                  </Magnetic>
+                </motion.div>
+              ))}
+            </div>
 
-        {/* 3. Subtitle */}
-        <div className="hero-parallax-text mt-8 space-y-1 md:mt-10">
-          {personal.roles.slice(0, 2).map((role) => (
-            <p key={role} className="hero-subtitle-line text-[clamp(1.05rem,2.2vw,1.5rem)] font-light text-white/80">
-              {role}
+            {/* 3. Subtitle */}
+            <div className="hero-parallax-text mt-8 space-y-1 md:mt-10">
+              {personal.roles.slice(0, 2).map((role) => (
+                <p key={role} className="hero-subtitle-line text-[clamp(1.05rem,2.2vw,1.5rem)] font-light text-white/80">
+                  {role}
+                </p>
+              ))}
+              <p className="hero-subtitle-line text-[clamp(1.05rem,2.2vw,1.5rem)] font-light text-accent">
+                Based in {personal.location}
+              </p>
+            </div>
+
+            {/* 4. About / description */}
+            <p className="hero-description hero-parallax-text mx-auto mt-6 max-w-xl text-sm leading-relaxed text-white/60 md:text-base">
+              {personal.heroSubtext}
             </p>
-          ))}
-          <p className="hero-subtitle-line text-[clamp(1.05rem,2.2vw,1.5rem)] font-light text-accent">
-            Based in {personal.location}
-          </p>
-        </div>
 
-        {/* 4. About / description */}
-        <p className="hero-description hero-parallax-text mx-auto mt-6 max-w-xl text-sm leading-relaxed text-white/60 md:text-base">
-          {personal.heroSubtext}
-        </p>
-
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-          <div className="hero-cta hero-parallax-btn">
-            <Button href={personal.cvUrl} variant="primary" download ariaLabel="Download CV">
-              <Download className="h-4 w-4" />
-              Download CV
-            </Button>
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+              <div className="hero-cta hero-parallax-btn">
+                <Button href={personal.cvUrl} variant="primary" download ariaLabel="Download CV">
+                  <Download className="h-4 w-4" />
+                  Download CV
+                </Button>
+              </div>
+              <div className="hero-cta hero-parallax-btn">
+                <Button href="#contact" variant="outline">
+                  Let&apos;s Talk
+                </Button>
+              </div>
+            </div>
           </div>
-          <div className="hero-cta hero-parallax-btn">
-            <Button href="#contact" variant="outline">
-              Let&apos;s Talk
-            </Button>
+
+          {/* Right column — glass video showcase (unchanged: size, glow, border radius, blur, motion) */}
+          <div className="order-1 w-full md:order-2 md:w-1/2 md:translate-x-3 lg:translate-x-8">
+            <HeroVideoCard className="hero-video-card w-full" />
           </div>
         </div>
-
-        {/* Centered floating premium video card (no longer full-bleed) */}
-        <HeroVideoCard className="hero-video-card mt-14 w-full md:mt-16" />
       </div>
 
       <div className="hero-scroll-indicator absolute bottom-7 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2">

@@ -7,7 +7,7 @@ import BurgerMenuBtn from "@/components/ui/BurgerMenuBtn";
 import { MagneticEffect } from "@/components/ui/Magnetic";
 import Link from "@/components/ui/Link";
 import Circles from "@/components/design/Circles";
-import { navbarLinks, navLinks, Bio, personal } from "@/data/content";
+import { navbarLinks, navLinks, personal } from "@/data/content";
 import { animateReferenceMenuEnter, animateReferenceMenuLeave, navbarScale } from "@/lib/animations";
 
 // Header + fullscreen hamburger menu.
@@ -115,13 +115,15 @@ export default function Header() {
 
       <header id="navbar-header" className="container-px absolute inset-x-0 top-0 z-20 h-fit pt-6 will-change-auto">
         <nav className="flex items-center justify-between">
-          <MagneticEffect strength={20} textStrength={10} divId="name-container" textId="name">
-            <div id="name-container" className="group relative z-30 -m-6 cursor-pointer p-6" data-cursor="hover">
-              <h2 id="name" className="font-display flex items-start text-lg font-extrabold uppercase text-white md:text-2xl">
-                {Bio.name}
-              </h2>
-            </div>
-          </MagneticEffect>
+          {/* Large top-left wordmark removed per request. Invisible placeholder
+              preserves the exact flex-between spacing of the navbar so the
+              small "Available for Work & Freelance" pill and nav links (About,
+              Work, Contact) keep their current position untouched. */}
+          <div className="invisible -m-6 p-6" aria-hidden="true">
+            <h2 className="font-display flex items-start text-lg font-extrabold uppercase text-white md:text-2xl">
+              Available for work and freelance
+            </h2>
+          </div>
 
           <div className="hidden justify-start md:flex">
             <p className="font-display select-none text-center text-xs font-bold uppercase leading-tight text-white/70">

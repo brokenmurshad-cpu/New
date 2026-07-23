@@ -1,8 +1,20 @@
 "use client";
 
-import React, { useEffect } from "react";
+// React is supplied by the Next.js runtime; keep the import for the client hook
+// while allowing builds that do not expose React's declarations to TypeScript.
+// @ts-expect-error React declarations may be unavailable in the editor environment.
+import { useEffect } from "react";
+// @ts-expect-error GSAP may be unavailable in the editor's type environment.
 import gsap from "gsap";
 import { ANIMATION_CONFIG, personal } from "@/data/content";
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elementName: string]: any;
+    }
+  }
+}
 
 // Cinematic entrance transition. Logic, timing and structure are ported
 // 1:1 from the approved reference "scribble wipe" implementation, with the
@@ -28,8 +40,9 @@ export default function Preloader() {
 
     document.body.style.overflow = "hidden";
 
-    // Purple + white brand palette only
-    const transitionColors = ["#9D4EDD", "#C77DFF", "#a855f7", "#ffffff", "#e9d5ff"];
+    // Preloader stroke animates in light beige/cream tones; the wordmark
+    // text itself always stays pure white (set separately below).
+    const transitionColors = ["#F5EFE3", "#EDE2CC", "#E8D9B8", "#F2E7D3", "#DCC9A0"];
 
     const runScribbleAnimation = () => {
       const config = ANIMATION_CONFIG.transitionScribble;

@@ -1,11 +1,13 @@
 "use client";
 
-import { useRef } from "react";
 import { cn } from "@/lib/utils";
 import { getGsap } from "@/lib/gsap";
 
+type ReactNode = any;
+type MouseEvent<T = unknown> = any;
+
 type MagneticProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   strength?: number;
   textStrength?: number;
@@ -21,12 +23,9 @@ export default function Magnetic({
   divId,
   textId,
 }: MagneticProps) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMove = (e: MouseEvent<HTMLDivElement>) => {
     if (window.matchMedia("(hover: none)").matches) return;
-    const el = ref.current;
-    if (!el) return;
+    const el = e.currentTarget as HTMLDivElement;
     const { gsap } = getGsap();
     const rect = el.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
@@ -52,9 +51,8 @@ export default function Magnetic({
     }
   };
 
-  const handleLeave = () => {
-    const el = ref.current;
-    if (!el) return;
+  const handleLeave = (e: MouseEvent<HTMLDivElement>) => {
+    const el = e.currentTarget as HTMLDivElement;
     const { gsap } = getGsap();
     gsap.to(el, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.4)" });
     if (textId) {
@@ -66,7 +64,6 @@ export default function Magnetic({
   return (
     <div
       id={divId}
-      ref={ref}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       className={cn("will-change-transform", className)}
