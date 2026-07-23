@@ -1,55 +1,328 @@
 "use client";
 
+import { motion } from "framer-motion";
 import Reveal from "@/components/ui/Reveal";
-import RevealText from "@/components/ui/RevealText";
-import Marquee from "@/components/ui/Marquee";
 import { stack } from "@/data/content";
 
-const allTech = stack.flatMap((group) => group.items);
+import {
+  SiJavascript,
+  SiTypescript,
+  SiReact,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiGreensock,
+  SiFramer,
+  SiNodedotjs,
+  SiExpress,
+  SiMongodb,
+  SiPostgresql,
+  SiPrisma,
+  SiGit,
+  SiDocker,
+  SiFigma,
+  SiVercel,
+} from "react-icons/si";
+
+
+const icons: Record<string, { icon: React.ElementType; color: string }> = {
+
+  JavaScript: {
+    icon: SiJavascript,
+    color: "#F7DF1E",
+  },
+
+  TypeScript: {
+    icon: SiTypescript,
+    color: "#3178C6",
+  },
+
+  React: {
+    icon: SiReact,
+    color: "#61DAFB",
+  },
+
+  "Next.js": {
+    icon: SiNextdotjs,
+    color: "#ffffff",
+  },
+
+  "Tailwind CSS": {
+    icon: SiTailwindcss,
+    color: "#06B6D4",
+  },
+
+  GSAP: {
+    icon: SiGreensock,
+    color: "#88CE02",
+  },
+
+  "Framer Motion": {
+    icon: SiFramer,
+    color: "#0055FF",
+  },
+
+  "Node.js": {
+    icon: SiNodedotjs,
+    color: "#339933",
+  },
+
+  "Express.js": {
+    icon: SiExpress,
+    color: "#ffffff",
+  },
+
+  MongoDB: {
+    icon: SiMongodb,
+    color: "#47A248",
+  },
+
+  PostgreSQL: {
+    icon: SiPostgresql,
+    color: "#4169E1",
+  },
+
+  Prisma: {
+    icon: SiPrisma,
+    color: "#ffffff",
+  },
+
+  Git: {
+    icon: SiGit,
+    color: "#F05032",
+  },
+
+  Docker: {
+    icon: SiDocker,
+    color: "#2496ED",
+  },
+
+  Figma: {
+    icon: SiFigma,
+    color: "#F24E1E",
+  },
+
+  Vercel: {
+    icon: SiVercel,
+    color: "#ffffff",
+  },
+
+};
+
 
 export default function TechStack() {
-  return (
-    <section id="stack" className="relative section-pad pt-8">
-      <div className="container-px mb-10">
-        <p className="mb-3 text-xs uppercase tracking-[0.3em] text-accent">Technology</p>
-        <RevealText
-          as="h2"
-          text="Tools I use to ship premium products"
-          className="max-w-3xl font-display text-[clamp(2rem,5vw,3.6rem)] font-medium leading-[1.05] text-white"
-        />
-      </div>
 
-      <Reveal>
-        <Marquee speed={40} className="border-y border-white/10 bg-white/[0.02] py-6">
-          {allTech.map((item) => (
-            <div
-              key={item}
-              className="mx-3 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm uppercase tracking-[0.16em] text-white/75"
-            >
-              {item}
-            </div>
-          ))}
-        </Marquee>
-      </Reveal>
+return (
 
-      <div className="container-px mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {stack.map((group, index) => (
-          <Reveal key={group.category} delay={index * 0.06}>
-            <div className="glass h-full rounded-[22px] p-6">
-              <h3 className="mb-4 text-sm uppercase tracking-[0.22em] text-accent">
-                {group.category}
-              </h3>
-              <ul className="space-y-2">
-                {group.items.map((item) => (
-                  <li key={item} className="text-sm text-white/70">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
-        ))}
-      </div>
-    </section>
-  );
+<section
+id="technology"
+className="
+relative
+overflow-hidden
+py-24
+md:py-32
+"
+>
+
+
+<div
+className="
+pointer-events-none
+absolute
+left-1/2
+top-1/2
+h-[500px]
+w-[500px]
+-translate-x-1/2
+-translate-y-1/2
+rounded-full
+bg-purple-500/10
+blur-[140px]
+"
+/>
+
+
+
+<div className="container-px relative z-10">
+
+
+<Reveal>
+
+<div className="mb-16">
+
+<span
+className="
+text-xs
+uppercase
+tracking-[0.4em]
+text-white/40
+"
+>
+Technology
+</span>
+
+
+<h2
+className="
+mt-6
+max-w-3xl
+font-display
+text-4xl
+font-bold
+tracking-tight
+text-white
+md:text-6xl
+"
+>
+Tools I build with
+</h2>
+
+
+</div>
+
+
+</Reveal>
+
+
+
+<div className="space-y-10">
+
+
+{stack.map((group,index)=>(
+
+
+<Reveal
+key={group.category}
+delay={index * 0.1}
+>
+
+
+<div
+className="
+grid
+gap-6
+border-b
+border-white/10
+pb-8
+md:grid-cols-[180px_1fr]
+md:items-center
+"
+>
+
+
+<h3
+className="
+text-sm
+uppercase
+tracking-[0.25em]
+text-accent
+"
+>
+{group.category}
+</h3>
+
+
+
+<div
+className="
+flex
+flex-wrap
+gap-5
+"
+>
+
+
+{group.items.map((item) => {
+
+const IconData = icons[item];
+
+
+return (
+
+<motion.div
+  key={item}
+
+  whileHover={{
+    y: -5,
+    scale: 1.05,
+  }}
+
+  transition={{
+    type: "spring",
+    stiffness: 300,
+  }}
+
+  className="
+  group
+  flex
+  items-center
+  gap-3
+  text-white/70
+  transition-colors
+  hover:text-white
+"
+>
+
+
+{IconData && (
+
+<IconData.icon
+
+  className="
+  h-6
+  w-6
+  transition-transform
+  duration-300
+  group-hover:scale-110
+  "
+
+  style={{
+    color: IconData.color,
+  }}
+
+/>
+
+)}
+
+
+
+<span
+className="
+text-sm
+font-medium
+md:text-base
+"
+>
+{item}
+</span>
+
+
+</motion.div>
+
+);
+
+})}
+
+
+</div>
+
+
+</div>
+
+
+</Reveal>
+
+
+))}
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+);
+
 }

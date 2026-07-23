@@ -332,3 +332,248 @@ body {
 .hero-video-glow {
   animation: hero-video-glow-pulse 4s ease-in-out infinite;
 }
+
+/* =====================================
+   Sticky Notes Board
+===================================== */
+
+
+.sticky-note {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  will-change: transform;
+}
+
+
+/* Paper texture effect */
+
+.sticky-note::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    radial-gradient(
+      rgba(255,255,255,0.35) 1px,
+      transparent 1px
+    );
+
+  background-size: 8px 8px;
+
+  opacity: 0.12;
+
+  pointer-events: none;
+}
+
+
+/* Soft paper shine */
+
+.sticky-note::after {
+
+  content: "";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.35),
+      transparent 40%
+    );
+
+  opacity:0.4;
+
+  pointer-events:none;
+
+}
+
+
+/* Floating subtle animation */
+
+@keyframes sticky-float {
+
+  0%,
+  100% {
+
+    transform:
+      translateY(0px);
+
+  }
+
+
+  50% {
+
+    transform:
+      translateY(-8px);
+
+  }
+
+}
+
+
+.sticky-note {
+
+  animation:
+    sticky-float 6s ease-in-out infinite;
+
+}
+
+
+/* Stop floating while interaction */
+
+.sticky-note:hover {
+
+  animation:none;
+
+}
+
+
+/* =====================================
+   Services Background Atmosphere
+===================================== */
+
+
+.sticky-section::before {
+
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+
+  background:
+
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(168,85,247,.15),
+      transparent 30%
+    ),
+
+
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(236,72,153,.12),
+      transparent 35%
+    );
+
+
+  pointer-events:none;
+
+
+}
+
+
+/* =====================================
+   Premium Selection
+===================================== */
+
+
+.sticky-note h3 {
+
+  font-family:
+    var(--font-display);
+
+  letter-spacing:
+    -0.03em;
+
+}
+
+
+/* =====================================
+   Mobile optimization
+===================================== */
+
+
+@media(max-width:768px){
+
+
+  .sticky-note {
+
+    max-width:
+      300px;
+
+  }
+
+
+}
+
+
+/* =====================================
+   Cursor Purple Glow
+===================================== */
+
+
+.cursor-glow {
+
+
+  position:fixed;
+
+  width:120px;
+
+  height:120px;
+
+  border-radius:50%;
+
+
+  background:
+    rgba(168,85,247,.25);
+
+
+  filter:
+    blur(35px);
+
+
+  pointer-events:none;
+
+
+  z-index:9990;
+
+
+  mix-blend-mode:
+    screen;
+
+
+}
+
+/* ===== Infinite Marquee Animation ===== */
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+
+@keyframes marquee-reverse {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+
+.animate-marquee {
+  animation: marquee linear infinite;
+}
+
+
+.animate-marquee-reverse {
+  animation: marquee-reverse linear infinite;
+}
+
+
+.marquee-track {
+  will-change: transform;
+}
