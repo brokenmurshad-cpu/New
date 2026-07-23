@@ -71,26 +71,33 @@ export default function Preloader() {
        transitionLogo.style.cssText =
 "position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:10002; pointer-events:none; opacity:1; display:flex; justify-content:center; align-items:center;";
 
-       const nameNode = document.createElement("h2");
+      const nameNode = document.createElement("h2");
 
-nameNode.innerText = personal.fullName;
+nameNode.innerHTML = "MUHAMMAD<br/>HUSNAIN";
 
 nameNode.style.fontFamily = "Montserrat, Arial, sans-serif";
-nameNode.style.fontSize = "clamp(3rem, 8vw, 6rem)";
+nameNode.style.fontSize = "clamp(2.5rem, 6vw, 4.5rem)";
 nameNode.style.fontWeight = "900";
-nameNode.style.letterSpacing = "0.15em";
+nameNode.style.lineHeight = "1.05";
+nameNode.style.letterSpacing = "0.12em";
 nameNode.style.color = "#FFF7ED";
 nameNode.style.textTransform = "uppercase";
 nameNode.style.whiteSpace = "nowrap";
+nameNode.style.textAlign = "center";
 nameNode.style.visibility = "visible";
 nameNode.style.opacity = "1";
-nameNode.style.transform = "scaleX(1.12)";
+nameNode.style.transform = "scaleX(1.05)";
 nameNode.style.textShadow =
-"0 0 30px rgba(255,247,237,0.45)";
+"0 0 20px rgba(255,247,237,0.35)";
 
 transitionLogo.appendChild(nameNode);
 
-}
+document.body.appendChild(transitionLogo);
+
+console.log("PRELOADER ELEMENT ADDED");
+
+      }
+
       transitionLogo.style.color = logoColor;
 
       gsap.set(transitionScribblePath, {
@@ -100,7 +107,12 @@ transitionLogo.appendChild(nameNode);
         opacity: 1,
       });
       gsap.set(transitionScribbleSvg, { opacity: 1, x: 0, y: 0, rotation: 0 });
-     gsap.set(transitionLogo, { opacity: 1, scale: 1 });
+   gsap.set(transitionLogo, {
+  opacity: 0,
+  scale: 0.85,
+  visibility: "visible",
+  display: "flex",
+});
       if (curtain) gsap.set(curtain, { opacity: 1, display: "flex" });
 
       document.body.classList.add("is-transitioning");
@@ -109,7 +121,8 @@ transitionLogo.appendChild(nameNode);
         onComplete: () => {
           document.body.classList.remove("is-transitioning");
           gsap.set(transitionScribblePath, { strokeWidth: "0%" });
-          gsap.set(transitionLogo!, { opacity: 0 });
+        gsap.killTweensOf(transitionLogo);
+gsap.set(transitionLogo, { opacity: 0, scale: 0.85 });
           if (curtain) gsap.set(curtain, { display: "none" });
           if (transitionLogo && transitionLogo.parentNode) {
             transitionLogo.parentNode.removeChild(transitionLogo);
@@ -140,12 +153,30 @@ transitionLogo.appendChild(nameNode);
       drawTl.to(transitionScribblePath, { strokeWidth: config.strokeWidthStart, duration: durOut, ease: "power2.inOut" }, durIn);
 
       // drawTl.set(transitionLogo, { autoAlpha: 0 }, 0);
-      drawTl.to(
-        transitionLogo,
-        { autoAlpha: 1, duration: durIn * 0.5, ease: "power2.out" },
-        durIn * 0.5,
-      );
-      drawTl.set(transitionLogo, { autoAlpha: 0 }, durIn + durOut * 0.48);
+  // NAME APPEAR AFTER STROKE START
+drawTl.to(
+  transitionLogo,
+  {
+    opacity: 1,
+    scale: 1,
+    duration: 0.6,
+    ease: "power3.out",
+  },
+  durIn * 0.35
+);
+
+
+// NAME FADE OUT BEFORE STROKE FINISH
+drawTl.to(
+  transitionLogo,
+  {
+    opacity: 0,
+    scale: 0.95,
+    duration: 0.35,
+    ease: "power2.in",
+  },
+  durIn + (durOut * 0.25)
+);
     };
 
     const timer = setTimeout(() => runScribbleAnimation(), 100);
