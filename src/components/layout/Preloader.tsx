@@ -18,7 +18,7 @@ declare global {
 
 // Cinematic entrance transition. Logic, timing and structure are ported
 // 1:1 from the approved reference "scribble wipe" implementation, with the
-// color palette locked to brand purple/white and the wordmark swapped to
+// color palette uses premium purple and beige tones and the wordmark swapped to
 // Muhammad Husnain. A solid curtain backs the stroke so the reveal never
 // shows an unfinished frame on any aspect ratio, then it dispatches
 // "app:preloader-complete" so the Hero can start its own entrance timeline.
@@ -42,8 +42,13 @@ export default function Preloader() {
 
     // Preloader stroke animates in light beige/cream tones; the wordmark
     // text itself always stays pure white (set separately below).
-    const transitionColors = ["#F5EFE3", "#EDE2CC", "#E8D9B8", "#F2E7D3", "#DCC9A0"];
-
+ const transitionColors = [
+  "#7C3AED", // Premium Purple
+  "#A855F7", // Soft Purple
+  "#D6B98C", // Beige Gold
+  "#F5E6C8", // Warm Beige
+  "#6D28D9", // Deep Purple
+];
     const runScribbleAnimation = () => {
       const config = ANIMATION_CONFIG.transitionScribble;
       const durIn = config.durationIn || 0.8;
@@ -57,7 +62,7 @@ export default function Preloader() {
       const randomColor = transitionColors[Math.floor(Math.random() * transitionColors.length)];
       transitionScribbleSvg.style.color = randomColor;
 
-      const logoColor = "#ffffff";
+      const logoColor = "#FFF7ED";
 
       let transitionLogo = document.querySelector(".transition-logo") as HTMLElement | null;
       if (!transitionLogo) {
@@ -67,12 +72,26 @@ export default function Preloader() {
           "position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:10002; pointer-events:none; opacity:0; display:flex; justify-content:center; align-items:center; transition: color 0.1s;";
 
         const nameNode = document.createElement("h2");
-        nameNode.className = "font-display flex items-start text-4xl font-extrabold uppercase tracking-tight text-white md:text-6xl";
-        nameNode.innerHTML = personal.fullName;
-        transitionLogo.appendChild(nameNode);
 
-        document.body.appendChild(transitionLogo);
-      }
+nameNode.innerText = "Muhammad Husnain";
+
+nameNode.style.fontFamily = "Montserrat, Arial, sans-serif";
+nameNode.style.fontSize = "clamp(3rem, 8vw, 6rem)";
+nameNode.style.fontWeight = "900";
+nameNode.style.letterSpacing = "0.15em";
+nameNode.style.color = "#FFF7ED";
+nameNode.style.textTransform = "uppercase";
+nameNode.style.whiteSpace = "nowrap";
+nameNode.style.display = "block";
+nameNode.style.visibility = "visible";
+nameNode.style.opacity = "1";
+nameNode.style.transform = "scaleX(1.12)";
+nameNode.style.textShadow =
+"0 0 30px rgba(255,247,237,0.45)";
+
+transitionLogo.appendChild(nameNode);
+
+}
       transitionLogo.style.color = logoColor;
 
       gsap.set(transitionScribblePath, {
