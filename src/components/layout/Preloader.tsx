@@ -2,9 +2,9 @@
 
 // React is supplied by the Next.js runtime; keep the import for the client hook
 // while allowing builds that do not expose React's declarations to TypeScript.
-// @ts-expect-error React declarations may be unavailable in the editor environment.
+
 import { useEffect } from "react";
-// @ts-expect-error GSAP may be unavailable in the editor's type environment.
+
 import gsap from "gsap";
 import { ANIMATION_CONFIG, personal } from "@/data/content";
 
