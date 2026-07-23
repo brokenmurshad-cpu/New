@@ -68,12 +68,12 @@ export default function Preloader() {
       if (!transitionLogo) {
         transitionLogo = document.createElement("div");
         transitionLogo.className = "transition-logo";
-        transitionLogo.style.cssText =
-          "position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:10002; pointer-events:none; opacity:0; display:flex; justify-content:center; align-items:center; transition: color 0.1s;";
+       transitionLogo.style.cssText =
+"position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:10002; pointer-events:none; opacity:1; display:flex; justify-content:center; align-items:center;";
 
-        const nameNode = document.createElement("h2");
+       const nameNode = document.createElement("h2");
 
-nameNode.innerText = "Muhammad Husnain";
+nameNode.innerText = personal.fullName;
 
 nameNode.style.fontFamily = "Montserrat, Arial, sans-serif";
 nameNode.style.fontSize = "clamp(3rem, 8vw, 6rem)";
@@ -82,7 +82,6 @@ nameNode.style.letterSpacing = "0.15em";
 nameNode.style.color = "#FFF7ED";
 nameNode.style.textTransform = "uppercase";
 nameNode.style.whiteSpace = "nowrap";
-nameNode.style.display = "block";
 nameNode.style.visibility = "visible";
 nameNode.style.opacity = "1";
 nameNode.style.transform = "scaleX(1.12)";
@@ -101,7 +100,7 @@ transitionLogo.appendChild(nameNode);
         opacity: 1,
       });
       gsap.set(transitionScribbleSvg, { opacity: 1, x: 0, y: 0, rotation: 0 });
-      gsap.set(transitionLogo, { opacity: 0, scale: 1 });
+     gsap.set(transitionLogo, { opacity: 1, scale: 1 });
       if (curtain) gsap.set(curtain, { opacity: 1, display: "flex" });
 
       document.body.classList.add("is-transitioning");
@@ -140,7 +139,7 @@ transitionLogo.appendChild(nameNode);
       drawTl.to(transitionScribblePath, { strokeDashoffset: -l, duration: durOut, ease: "power2.inOut" }, durIn);
       drawTl.to(transitionScribblePath, { strokeWidth: config.strokeWidthStart, duration: durOut, ease: "power2.inOut" }, durIn);
 
-      drawTl.set(transitionLogo, { autoAlpha: 0 }, 0);
+      // drawTl.set(transitionLogo, { autoAlpha: 0 }, 0);
       drawTl.to(
         transitionLogo,
         { autoAlpha: 1, duration: durIn * 0.5, ease: "power2.out" },
