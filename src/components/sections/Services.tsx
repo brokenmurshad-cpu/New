@@ -190,7 +190,7 @@ export default function Services() {
                   alt={hoverPreview.alt}
                   fill
                   sizes="288px"
-                  quality={70}
+                  quality={75}
                   className="object-cover"
                 />
               </motion.div>
