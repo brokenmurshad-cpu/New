@@ -6,13 +6,24 @@ import Image from "next/image";
 import { services } from "@/data/content";
 import RevealText from "@/components/ui/RevealText";
 
-// Add your own service preview images inside the public/images/services folder,
-// then replace these paths with your real file names.
-const servicePreviewImages: Record<string, string> = {
-  "01": "/images/services/ai-engineering.webp",
-  "02": "/images/services/web-development.webp",
-  "03": "/images/services/ai-development.webp",
-  "04": "/images/services/service-04.webp",
+// Keep these files inside public/images/services with the exact names below.
+const serviceDisplay: Record<string, { title: string; image: string }> = {
+  "01": {
+    title: "Web Development",
+    image: "/images/services/web-development.webp",
+  },
+  "02": {
+    title: "AI Engineering",
+    image: "/images/services/ai-engineering.webp",
+  },
+  "03": {
+    title: "SaaS Product Building",
+    image: "/images/services/saas-product-building.webp",
+  },
+  "04": {
+    title: "Performance & Optimization",
+    image: "/images/services/performance-optimization.webp",
+  },
 };
 
 type HoverPreview = {
@@ -59,17 +70,16 @@ export default function Services() {
     event: ReactPointerEvent<HTMLHeadingElement>,
   ) => {
     const service = services[activeIndex];
-    const image = servicePreviewImages[service.index];
-
-    if (!image) return;
+    const display = serviceDisplay[service.index];
+    if (!display) return;
 
     const previewWidth = 288;
     const previewHeight = 208;
     const edgeSpace = 20;
 
     setHoverPreview({
-      src: image,
-      alt: `${service.title} preview`,
+      src: display.image,
+      alt: `${display.title} preview`,
       x: Math.max(
         edgeSpace,
         Math.min(event.clientX + 24, window.innerWidth - previewWidth - edgeSpace),
@@ -132,7 +142,8 @@ export default function Services() {
                     onPointerLeave={() => setHoverPreview(null)}
                     className="font-display cursor-pointer text-4xl font-bold text-white md:text-6xl"
                   >
-                    {services[activeIndex].title}
+                    {serviceDisplay[services[activeIndex].index]?.title ??
+                      services[activeIndex].title}
                   </h3>
 
                   <p className="mt-6 text-base leading-relaxed text-white/60 md:text-lg">
