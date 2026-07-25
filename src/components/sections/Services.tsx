@@ -9,10 +9,10 @@ import RevealText from "@/components/ui/RevealText";
 // Add your own service preview images inside the public/images/services folder,
 // then replace these paths with your real file names.
 const servicePreviewImages: Record<string, string> = {
-  "01": "/images/services/ai-engineering.jpg",
-  "02": "/images/services/web-development.jpg",
-  "03": "/images/services/ai-development.jpg",
-  "04": "/images/services/service-04.jpg",
+  "01": "/images/services/ai-engineering.webp",
+  "02": "/images/services/web-development.webp",
+  "03": "/images/services/ai-development.webp",
+  "04": "/images/services/service-04.webp",
 };
 
 type HoverPreview = {
