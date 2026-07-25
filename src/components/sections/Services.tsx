@@ -7,24 +7,24 @@ import { services } from "@/data/content";
 import RevealText from "@/components/ui/RevealText";
 
 // Keep these files inside public/images/services with the exact names below.
-const serviceDisplay: Record<string, { title: string; image: string }> = {
-  "01": {
+const serviceDisplay = [
+  {
     title: "Web Development",
     image: "/images/services/web-development.webp",
   },
-  "02": {
+  {
     title: "AI Engineering",
     image: "/images/services/ai-engineering.webp",
   },
-  "03": {
+  {
     title: "SaaS Product Building",
     image: "/images/services/saas-product-building.webp",
   },
-  "04": {
+  {
     title: "Performance & Optimization",
     image: "/images/services/performance-optimization.webp",
   },
-};
+] as const;
 
 type HoverPreview = {
   src: string;
@@ -70,7 +70,7 @@ export default function Services() {
     event: ReactPointerEvent<HTMLHeadingElement>,
   ) => {
     const service = services[activeIndex];
-    const display = serviceDisplay[service.index];
+    const display = serviceDisplay[activeIndex];
     if (!display) return;
 
     const previewWidth = 288;
@@ -142,7 +142,7 @@ export default function Services() {
                     onPointerLeave={() => setHoverPreview(null)}
                     className="font-display cursor-pointer text-4xl font-bold text-white md:text-6xl"
                   >
-                    {serviceDisplay[services[activeIndex].index]?.title ??
+                    {serviceDisplay[activeIndex]?.title ??
                       services[activeIndex].title}
                   </h3>
 
