@@ -178,11 +178,11 @@ export default function Hero() {
         {/* Two-column row beneath the title: text stack (left, shifted under
             "Muhammad") and the glass video showcase (right, shifted under
             "Husnain"). Stacks vertically on mobile — video first, then text. */}
-        <div className="mt-6 flex w-full flex-col items-center gap-10 md:mt-10 md:flex-row md:items-center md:justify-center md:gap-8 lg:gap-12">
+        <div className="mt-6 flex w-full flex-col items-center gap-10 md:mt-10 md:flex-row md:items-center md:justify-center md:gap-0 lg:gap-0">
           {/* Left column — icons, subtitle, description, CTAs */}
-          <div className="order-2 flex w-full flex-col items-center text-center md:order-1 md:w-1/2 md:items-center md:-translate-x-3 lg:-translate-x-8">
+         <div className="relative z-20 order-2 flex w-full flex-col items-center text-center md:order-1 md:w-[52%] md:items-center md:translate-x-15 lg:translate-x-16">
             {/* 2. Social icons — centered, floating, magnetic, parallax */}
-            <div className="hero-parallax-text flex items-center gap-4">
+           <div className="hero-parallax-text flex items-center gap-4 md:translate-x-8 lg:translate-x-12">
               {socialItems.map((item, i) => (
                 <motion.div
                   key={item.label}
@@ -207,7 +207,7 @@ export default function Hero() {
             </div>
 
             {/* 3. Subtitle */}
-            <div className="hero-parallax-text mt-8 space-y-1 md:mt-10">
+            <div className="hero-parallax-text mt-5 space-y-1 md:mt-6">
               {personal.roles.slice(0, 2).map((role) => (
                 <p key={role} className="hero-subtitle-line text-[clamp(1.05rem,2.2vw,1.5rem)] font-light text-white/80">
                   {role}
@@ -239,7 +239,7 @@ export default function Hero() {
           </div>
 
           {/* Right column — glass video showcase (unchanged: size, glow, border radius, blur, motion) */}
-          <div className="order-1 w-full md:order-2 md:w-1/2 md:translate-x-3 lg:translate-x-8">
+          <div className="relative z-10 order-1 w-full md:order-2 md:w-[48%] md:translate-x-2 lg:translate-x-4 -ml-28">
             <HeroVideoCard className="hero-video-card w-full" />
           </div>
         </div>
