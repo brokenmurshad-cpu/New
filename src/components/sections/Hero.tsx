@@ -180,9 +180,9 @@ export default function Hero() {
             "Husnain"). Stacks vertically on mobile — video first, then text. */}
         <div className="mt-6 flex w-full flex-col items-center gap-10 md:mt-10 md:flex-row md:items-center md:justify-center md:gap-0 lg:gap-0">
           {/* Left column — icons, subtitle, description, CTAs */}
-         <div className="relative z-20 order-2 flex w-full flex-col items-center text-center md:order-1 md:w-[52%] md:items-center md:translate-x-15 lg:translate-x-16">
+        <div className="relative z-20 order-2 flex w-full flex-col items-center text-center md:order-1 md:w-[52%] md:items-center md:-translate-x-2 lg:-translate-x-3">
             {/* 2. Social icons — centered, floating, magnetic, parallax */}
-           <div className="hero-parallax-text flex items-center gap-4 md:translate-x-8 lg:translate-x-12">
+          <div className="hero-parallax-text flex items-center justify-center gap-4 w-full">
               {socialItems.map((item, i) => (
                 <motion.div
                   key={item.label}
